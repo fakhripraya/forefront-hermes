@@ -1,7 +1,7 @@
 {
   "name": "forefront-hermes",
   "version": "0.1.0",
-  "description": "Signaler service for LiveJB chat",
+  "description": "Short Message Signalling service mainly used for chat app",
   "main": "index.js",
   "type": "module",
   "dependencies": {
