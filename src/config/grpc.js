@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 
 export const InitGRPC = () => {
   // load proto
+  const APP_GRPC_MESSAGING_SERVICE_PORT =
+    process.env.APP_GRPC_MESSAGING_SERVICE_PORT;
   const messagingPackageDefinition = protoLoader.loadSync(
     path.resolve(__dirname, "../../proto/messaging.proto"),
     {
@@ -21,10 +23,11 @@ export const InitGRPC = () => {
   );
   const MessagingProtoDescriptor =
     grpc.loadPackageDefinition(messagingPackageDefinition);
-  const client = new MessagingProtoDescriptor.Messaging(
-    "[::]:50051",
-    grpc.credentials.createInsecure()
-  );
+  const client =
+    new MessagingProtoDescriptor.MessagingService(
+      APP_GRPC_MESSAGING_SERVICE_PORT,
+      grpc.credentials.createInsecure()
+    );
 
   return client;
 };

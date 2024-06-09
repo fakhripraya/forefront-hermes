@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-service Messaging {
+service MessagingService {
   rpc textMessaging (MessageRequest) returns (MessageResponse);
 }
 
