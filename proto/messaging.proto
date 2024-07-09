@@ -11,5 +11,7 @@ message MessageRequest {
 }
 
 message MessageResponse {
-  string result = 1;
+  string input = 1;
+  string output = 2;
+  string output_content = 3;
 }
