@@ -7,7 +7,8 @@ service MessagingService {
 message Empty {}
 
 message MessageRequest {
-  string content = 1;
+  string sessionId = 1;
+  string content = 2;
 }
 
 message MessageResponse {

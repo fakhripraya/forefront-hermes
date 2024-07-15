@@ -6,10 +6,11 @@ const defaultRoute = (app, protoClient) => {
   app.post(`/v1/`, async (req, res) => {
     protoClient.textMessaging(
       {
+        sessionId: req.body["sessionId"],
         content: req.body["content"],
       },
       (err, response) => {
-        if (err) return res.status(500).end();
+        if (err) return res.status(500).send(err);
         return res.status(201).json(response);
       }
     );
