@@ -1,9 +1,10 @@
+import { APP_STATE } from "../../config/environment.js";
 import { DEV, PREPROD } from "../variables/general.js";
 
 const initializeSignaler = (io, protoClient) => {
   // ENV
   // toggle debug
-  const DEBUG = process.env.APP_STATE === DEV || PREPROD;
+  const DEBUG = APP_STATE === DEV || PREPROD;
 
   // VARIABLES
   let stores = {};

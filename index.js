@@ -1,13 +1,10 @@
 import express from "express";
 import InitWebsocket from "./src/config/websocket.js";
-import dotenv from "dotenv";
 import defaultRoute from "./src/routes/default.js";
 import AppConfig from "./src/config/index.js";
 import initializeSignaler from "./src/signaler/index.js";
 import { InitGRPC } from "./src/config/grpc.js";
-
-// Init env
-dotenv.config();
+import { APP_PORT } from "./config/environment.js";
 
 // Initialize express app object
 const expressApp = express();
@@ -28,7 +25,7 @@ defaultRoute(app, protoClient);
 initializeSignaler(io, protoClient);
 
 // Server listen
-const port = process.env.PORT || 7001;
+const port = APP_PORT || 7001;
 server.listen(port, () => {
   console.log(
     `Signaling Server is up and running on ${port} ...`

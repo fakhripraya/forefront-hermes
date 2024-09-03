@@ -6,14 +6,13 @@ import https from "httpolyglot";
 import http from "http";
 import fs from "fs";
 import pluralize from "pluralize";
+import {
+  APP_CERT_PATH,
+  APP_ENABLE_LOCAL_HTTPS,
+  APP_KEY_PATH,
+} from "../../config/environment.js";
 
 const AppConfig = (app, express) => {
-  // env
-  const APP_ENABLE_LOCAL_HTTPS =
-    process.env.APP_ENABLE_LOCAL_HTTPS;
-  const APP_CERT_PATH = process.env.APP_CERT_PATH;
-  const APP_KEY_PATH = process.env.APP_KEY_PATH;
-
   // Express app config
   app.locals.pluralize = pluralize;
   app.use(logger("dev"));
