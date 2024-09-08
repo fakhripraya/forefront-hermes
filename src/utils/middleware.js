@@ -9,7 +9,7 @@ import { POSTRequest } from "./axios/post.js";
 
 export const checkAuth = async (req, res, next) => {
   const refreshToken = req.body["refreshToken"];
-  const sid = req.body["sid"];
+  const sid = req.headers["x-sid"];
   const token = req.headers["authorization"];
 
   // get OAUTH token
