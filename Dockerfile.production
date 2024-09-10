@@ -1,0 +1,29 @@
+# Stage 1: Build the Vite project
+FROM node:20.17.0-alpine AS build
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the application files and build the project
+COPY . .
+RUN npm run build
+
+# Stage 2: Serve the built files with a static file server
+FROM node:20.17.0-alpine
+
+WORKDIR /app
+
+# Install a lightweight static file server
+RUN npm install -g serve
+
+# Copy the built files from the previous stage
+COPY --from=build /app/dist ./dist
+
+# Expose port 3000 for the HTTP server
+EXPOSE 3000
+
+# Serve the static files
+CMD ["serve", "-s", "dist", "-l", "3000"]

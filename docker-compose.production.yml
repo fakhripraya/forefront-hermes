@@ -1,0 +1,38 @@
+services:
+  reverse-proxy:
+    image: traefik:v3.1
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--entrypoints.web.address=:80"
+    ports:
+      # The HTTP Port
+      - "80:80"
+      # The Traefik Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So Traefik can listen to Docker Events
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - web
+
+  forefront-hermes:
+    build:
+      context: ./forefront-hermes
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env.production
+    deploy:
+      mode: replicated
+      replicas: 3
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.forefront-hermes.rule=Host(`api.yourdomain.com`) && PathPrefix(`/he`)"
+      - "traefik.http.services.forefront-hermes.loadbalancer.server.port=7001"
+    networks:
+      - web
+networks:
+  web:
+    driver: bridge

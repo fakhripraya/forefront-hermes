@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  forefront-hermes:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    ports:
+      - "7001:7001"
+    volumes:
+      - .:/app
+      - /app/node_modules
