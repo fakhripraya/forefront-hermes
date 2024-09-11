@@ -20,7 +20,8 @@ export const APP_CERT_PATH =
   process.env.APP_CERT_PATH || "";
 export const APP_KEY_PATH = process.env.APP_KEY_PATH || "";
 export const APP_ENABLE_LOCAL_HTTPS =
-  process.env.APP_ENABLE_LOCAL_HTTPS || false;
+  process.env.APP_ENABLE_LOCAL_HTTPS === "true" ||
+  process.env.APP_ENABLE_LOCAL_HTTPS === "1";
 
 export const APP_OLYMPUS_SERVICE_BASE_URL =
   process.env.APP_OLYMPUS_SERVICE_BASE_URL || "";
