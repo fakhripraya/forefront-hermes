@@ -35,7 +35,7 @@ const AppConfig = (app, express) => {
   // SSL cert for HTTPS access
   // (this is for test purposes and will not be used on production app)
   let server = http.createServer(app);
-  if (APP_ENABLE_LOCAL_HTTPS) {
+  if (APP_ENABLE_LOCAL_HTTPS === true) {
     const options = {
       key: fs.readFileSync(APP_KEY_PATH, "utf-8"),
       cert: fs.readFileSync(APP_CERT_PATH, "utf-8"),

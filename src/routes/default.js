@@ -2,7 +2,7 @@ import { checkAuth } from "../utils/middleware.js";
 
 const defaultRoute = (app, protoClient) => {
   app.get(`/v1/`, async (req, res) => {
-    return res.status(200);
+    return res.sendStatus(200);
   });
 
   app.post(`/v1/`, checkAuth, async (req, res) => {

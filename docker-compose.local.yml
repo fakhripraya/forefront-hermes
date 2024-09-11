@@ -1,7 +1,5 @@
-version: "3.8"
-
 services:
-  forefront-hermes:
+  app:
     build:
       context: .
       dockerfile: Dockerfile.local
@@ -10,3 +8,12 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    networks:
+      - web
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env.local
+networks:
+  web:
+    driver: bridge

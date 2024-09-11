@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Set environment variables from .env
-ENV $(cat .env | xargs)
+ENV $(cat .env.local | xargs)
 
 # Expose the port your app will run on
 EXPOSE 7001
