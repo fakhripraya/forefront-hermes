@@ -1,45 +1,23 @@
-# Stage 1: Build the Vite project
-FROM node:20.17.0-alpine AS build
+# Use the official Node.js image with a specific version
+FROM node:20.17.0-alpine
 
-# Builder stage
+# Set the working directory
+WORKDIR /app
 
-FROM node AS builder
+# Copy package.json and package-lock.json (if applicable)
+COPY package*.json ./
 
-# Use /app as the CWD
-WORKDIR /app            
+# Install npm dependencies
+RUN npm install
 
-# Copy package.json and package-lock.json to /app
-COPY package*.json ./   
+# Copy the rest of the application files
+COPY . .
 
-# Install all dependencies
-RUN npm i               
+# Set environment variables from .env
+ENV $(cat .env.production | xargs)
 
-# Copy the rest of the code
-COPY . .   
-
-
-# Final stage
-
-
-FROM node AS final
-
-# Prepare a destination directory for js files
-RUN mkdir -p /app/dist                  
-
-# Use /app as CWD
-WORKDIR /app                            
-
-# Copy package.json and package-lock.json
-COPY package*.json ./                   
-
-# Install only production dependencies
-RUN npm i --only=production             
-
-# Copy transpiled js from builder stage into the final image
-COPY --from=builder /app/dist ./dist
-
-# Open desired port
+# Expose the port your app will run on
 EXPOSE 7001
 
-# Use js files to run the application
-ENTRYPOINT ["node", "./dist/index.js"]
+# Command to run the static file server
+CMD ["node", "index.js"]
