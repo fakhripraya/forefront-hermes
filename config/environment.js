@@ -13,9 +13,12 @@ dotenv.config({
 
 export const APP_PORT = process.env.PORT || 7001;
 export const APP_STATE = process.env.APP_STATE || "DEV";
+export const APP_WITH_PREFIX =
+  process.env.APP_WITH_PREFIX === "true" ||
+  process.env.APP_WITH_PREFIX === "1";
+
 export const APP_ORIGIN =
   process.env.APP_ORIGIN || "http://localhost:3000";
-
 export const APP_CERT_PATH =
   process.env.APP_CERT_PATH || "";
 export const APP_KEY_PATH = process.env.APP_KEY_PATH || "";

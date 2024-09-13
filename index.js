@@ -4,7 +4,10 @@ import defaultRoute from "./src/routes/default.js";
 import AppConfig from "./src/config/index.js";
 import initializeSignaler from "./src/signaler/index.js";
 import { InitGRPC } from "./src/config/grpc.js";
-import { APP_PORT } from "./config/environment.js";
+import {
+  APP_PORT,
+  APP_WITH_PREFIX,
+} from "./config/environment.js";
 
 // Initialize express app object
 const expressApp = express();
@@ -18,8 +21,13 @@ const io = InitWebsocket(server);
 // init proto
 const protoClient = InitGRPC();
 
+// Define Router
+const routes = express.Router();
+
 // Init Routes
-defaultRoute(app, protoClient);
+defaultRoute(routes, protoClient);
+
+if (APP_WITH_PREFIX) app.use("/he", routes);
 
 // Init Signaler
 initializeSignaler(io, protoClient);
