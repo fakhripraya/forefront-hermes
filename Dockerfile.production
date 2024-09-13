@@ -15,10 +15,7 @@ COPY package*.json ./
 RUN npm i               
 
 # Copy the rest of the code
-COPY . .                
-
-# Invoke the build script to transpile code to js
-RUN npm run build       
+COPY . .   
 
 
 # Final stage
