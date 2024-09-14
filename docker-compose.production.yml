@@ -18,7 +18,7 @@ services:
 
   forefront-hermes:
     build:
-      context: ./forefront-hermes
+      context: .
     environment:
       - NODE_ENV=production
     env_file:
