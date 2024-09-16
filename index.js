@@ -27,7 +27,9 @@ const routes = express.Router();
 // Init Routes
 defaultRoute(routes, protoClient);
 
+// Assign all routes
 if (APP_WITH_PREFIX) app.use("/he", routes);
+else app.use("/", routes);
 
 // Init Signaler
 initializeSignaler(io, protoClient);
