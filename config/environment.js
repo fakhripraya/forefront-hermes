@@ -32,6 +32,9 @@ export const APP_OLYMPUS_SERVICE_BASE_URL =
 export const APP_CLIENT_BASE_URL =
   process.env.APP_CLIENT_BASE_URL || "";
 
+export const APP_GRPC_SECURE =
+  process.env.APP_GRPC_SECURE === "true" ||
+  process.env.APP_GRPC_SECURE === "1";
 export const APP_GRPC_MESSAGING_SERVICE_HOST =
   process.env.APP_GRPC_MESSAGING_SERVICE_HOST || "";
 export const APP_GRPC_MESSAGING_SERVICE_PORT =

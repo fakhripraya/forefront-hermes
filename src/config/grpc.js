@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import {
   APP_GRPC_MESSAGING_SERVICE_HOST,
   APP_GRPC_MESSAGING_SERVICE_PORT,
+  APP_GRPC_SECURE,
 } from "../../config/environment.js";
 
 // Convert import.meta.url to a file path
@@ -25,10 +26,13 @@ export const InitGRPC = () => {
   );
   const MessagingProtoDescriptor =
     grpc.loadPackageDefinition(messagingPackageDefinition);
+  const gcredential = APP_GRPC_SECURE
+    ? grpc.credentials.createSsl()
+    : grpc.credentials.createInsecure();
   const client =
     new MessagingProtoDescriptor.MessagingService(
       `${APP_GRPC_MESSAGING_SERVICE_HOST}:${APP_GRPC_MESSAGING_SERVICE_PORT}`,
-      grpc.credentials.createInsecure()
+      gcredential
     );
 
   return client;
