@@ -11,7 +11,7 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-export const APP_PORT = process.env.PORT || 7001;
+export const APP_PORT = process.env.PORT || 7000;
 export const APP_STATE = process.env.APP_STATE || "DEV";
 export const APP_WITH_PREFIX =
   process.env.APP_WITH_PREFIX === "true" ||
