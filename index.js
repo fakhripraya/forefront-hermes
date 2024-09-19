@@ -6,8 +6,10 @@ import initializeSignaler from "./src/signaler/index.js";
 import { InitGRPC } from "./src/config/grpc.js";
 import {
   APP_PORT,
+  APP_STATE,
   APP_WITH_PREFIX,
 } from "./config/environment.js";
+import { PROD } from "./src/variables/general.js";
 
 // Initialize express app object
 const expressApp = express();
@@ -34,10 +36,13 @@ else app.use("/", routes);
 // Init Signaler
 initializeSignaler(io, protoClient);
 
-// Server listen
-const port = APP_PORT || 7001;
+const defaultPort = 7000;
+const port =
+  APP_STATE === PROD ? 0 : APP_PORT || defaultPort;
+
 server.listen(port, () => {
+  const actualPort = server.address().port;
   console.log(
-    `Signaling Server is up and running on ${port} ...`
+    `Signaling Server is up and running on ${actualPort} ...`
   );
 });
