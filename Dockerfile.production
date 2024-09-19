@@ -16,5 +16,8 @@ COPY . .
 # Set environment variables from .env
 ENV $(cat .env.production | xargs)
 
+# Expose the port your app will run on
+EXPOSE 7000
+
 # Command to run the static file server
 CMD ["node", "index.js"]
